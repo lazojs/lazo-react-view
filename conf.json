@@ -1,0 +1,9 @@
+{
+    "requirejs": {
+        "common": {
+            "paths": {
+                "react": "app/vendor/react/react-with-addons"
+            }
+        }
+    }
+}

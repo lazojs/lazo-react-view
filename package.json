@@ -1,0 +1,39 @@
+{
+  "name": "lazo-react-view",
+  "description": "Lazo hello world example",
+  "version": "1.0.0",
+  "keywords": [
+    "lazojs",
+    "hello world"
+  ],
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/jstrimpel/lazo-react-view/blob/master/LICENSE"
+    }
+  ],
+  "author": {
+    "name": "Jason Strimpel",
+    "email": "jstrimpel@gmail.com"
+  },
+  "bugs": {
+    "url": "https://github.com/jstrimpel/lazo-react-view/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jstrimpel/lazo-react-view.git"
+  },
+  "github": "https://github.com/jstrimpel/lazo-react-view",
+  "dependencies": {
+    "lazo": "2.0.14-alpha"
+  },
+  "scripts": {
+    "start": "lazo start ."
+  },
+  "maintainers": [
+    {
+      "name": "Jason Strimpel",
+      "email": "jstrimpel@gmail.com"
+    }
+  ]
+}
