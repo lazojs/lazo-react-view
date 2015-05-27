@@ -25,10 +25,10 @@
   },
   "github": "https://github.com/jstrimpel/lazo-react-view",
   "dependencies": {
-    "lazo": "2.0.14-alpha"
+    "lazo": "2.2.7-alpha"
   },
   "scripts": {
-    "start": "lazo start ."
+    "start": "lazo start ./example"
   },
   "maintainers": [
     {
