@@ -24,8 +24,12 @@
     "url": "https://github.com/jstrimpel/lazo-react-view.git"
   },
   "github": "https://github.com/jstrimpel/lazo-react-view",
-  "dependencies": {
+  "devDependencies": {
     "lazo": "2.2.7-alpha"
+  },
+  "main": "dist/index.js",
+  "lazo": {
+    "view": true
   },
   "scripts": {
     "start": "lazo start ./example"

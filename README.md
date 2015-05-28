@@ -17,4 +17,8 @@ a [react container component](https://medium.com/@learnreact/container-component
     * lazo view properties
     * context shared data
     * assets
+* Documentation
 
+## Running the Example
+
+`npm start`
