@@ -1,22 +1,33 @@
-define(['lazoView', 'react', 'underscore'], function (LazoView, react, _) {
+define(['lazoView', 'react', 'underscore'], function (LazoView, React, _) {
 
     'use strict';
 
-    var ReactViewFactory = react.createFactory(react.createClass({
+    return LazoView.extend({
 
-        handleClick: function (e) {
-            console.log(e);
+        constructor: function (options) {
+            this.containerFactory = React.createFactory(React.createClass({
+                handleClick: function (e) {
+                    console.log(e);
+                },
+
+                render: function () {
+                    var container = React.createElement('div', { 'lazo-cmp-container': 'child' });
+                    var text = React.createElement('div', null, 'I am a view node.');
+                    return React.createElement('div', { onClick: this.handleClick }, text, container);
+                }
+            }));
+
+            LazoView.prototype.constructor.call(this, options);
         },
 
-        render: function () {
-            var container = react.createElement('div', { 'lazo-cmp-container': 'child' });
-            var text = react.createElement('div', null, 'I am a view node.');
-            return react.createElement('div', { onClick: this.handleClick }, text, container);
-        }
-
-    }));
-
-    return LazoView.extend({
+        getState: function () {
+            return {
+                models: this.ctl.ctx.models,
+                collections: this.ctl.ctx.collections,
+                assets: this.ctl.ctx.assets,
+                data: this.ctl.ctx._rootCtx.data
+            };
+        },
 
         initialize: function () {
             var self = this;
@@ -28,7 +39,7 @@ define(['lazoView', 'react', 'underscore'], function (LazoView, react, _) {
                 if (self.ctl.name === 'home') {
                     self.render();
                 }
-            }, 2000)
+            }, 2000);
         },
 
         render: function (options) {
@@ -59,13 +70,14 @@ define(['lazoView', 'react', 'underscore'], function (LazoView, react, _) {
 
         reactFactory: function (data) {
             // 'ref' is a key word
-            react.render(ReactViewFactory(_.omit(data, 'ref')), this.el);
+            React.render(this.containerFactory(_.omit(data, 'ref')), this.el);
         },
 
         getInnerHtml: function (options) {
+            var self = this;
             this.serializeData({
                 success: function (data) {
-                    options.success(react.renderToString(ReactViewFactory(data)));
+                    options.success(React.renderToString(self.containerFactory(data)));
                 },
                 error: options.error
             });

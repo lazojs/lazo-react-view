@@ -35,7 +35,7 @@ define(['lazoCtl', 'async'], function (LazoCtl, async) {
                     return options.error(err);
                 }
 
-                options.success('a:react');
+                options.success('index');
             });
         }
 

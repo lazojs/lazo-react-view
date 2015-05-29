@@ -11,8 +11,8 @@ define(['lazoView'], function (LazoView) {
             if (!this.Container) {
                 throw new Error('lazo-react-view: A Reacr Container component must be defined, <lazo-react-view>.Container');
             }
+            LazoView.prototype.constructor.call(this, options);
             this.createContainer();
-            return LazoView.prototype.constructor.call(this, options);
         },
 
         createContainer: function () {
@@ -22,7 +22,7 @@ define(['lazoView'], function (LazoView) {
             // stateless components; the container component should be
             // extended with functionality similar to https://github.com/magalhas/backbone-react-component
             // should set this.container to this.Container instance
-            this.container = React.createFactory(this.Container);
+            this.container = this.React.createFactory(this.Container);
         },
 
         getContainerState: function () {
@@ -49,7 +49,7 @@ define(['lazoView'], function (LazoView) {
             options.success = options.success || function () {};
             options.error = options.error || function () {};
             try {
-                this.React.render(this.container, this.el);
+                this.React.render(this.container(), this.el);
                 // TODO:
                 // typically the HTML string is passed to success
                 // doesn't really add much value, but we should probably pass
@@ -62,7 +62,7 @@ define(['lazoView'], function (LazoView) {
 
         getInnerHtml: function (options) {
             try {
-                options.success(React.renderToString(this.container));
+                options.success(this.React.renderToString(this.container()));
             } catch (e) {
                 options.error(e);
             }
