@@ -1,9 +1,10 @@
 # lazo-react-view
-The `lazo-react-view` is designed to integrated [React](https://facebook.github.io/react/) with
-[Lazo](http://lazojs.org/) at the view level. The Lazo view passes data to a
+The `lazo-react-view` is designed to integrate [React](https://facebook.github.io/react/) with
+[Lazo](http://lazojs.org/) at the view level. The Lazo view acts as a bridge to a
 [React container component](https://medium.com/@learnreact/container-components-c0e67432e005).
 
->
+> The React container component is the entry point to React land. You CANNOT add Lazo child
+components, views, widgets, etc. beneath the React container component!
 
 ## Open Design Issues and Tasks
 
@@ -12,7 +13,7 @@ The `lazo-react-view` is designed to integrated [React](https://facebook.github.
 * More robust example (TodoMVC???)
   * Incorporate assets
   * Render model, collection and assets data
-  * Add stateless React components to container component
+  * Add stateless React components as children of the container component
   * DOM events and data changes that trigger re-rendering
 
 ## Example
@@ -39,16 +40,16 @@ Open browser:
 ### Overview
 The example leverages [jsx-requirejs-plugin](https://github.com/philix/jsx-requirejs-plugin)
 loader plugin to load AMD modules that contain [JSX](https://facebook.github.io/jsx/). This
-plugin and React are pulled in via [Bower](http://bower.io/) (See [`bower.json`](blob/master/bower.json) and
-[`.bowerrc`](blob/master/.bowerrc)).
+plugin and React are pulled in via [Bower](http://bower.io/) (See [`bower.json`](bower.json) and
+[`.bowerrc`](.bowerrc)).
 
 The [RequireJS](http://requirejs.org/) configuration for these is in
-[`./example/conf.json`](blob/master/example/conf.json).
+[`./example/conf.json`](example/conf.json).
 
 [http://localhost:8080/](http://localhost:8080/) returns the response from
-[`./exmaple/components/home`](tree/master/example/components/home). The Lazo view extends
+[`./exmaple/components/home`](example/components/home). The Lazo view extends
 `lazo-react-view` adding a reference to React and the
-[container component](blob/master/example/components/home/ui-components/HelloWorld.jsx).
+[container component](example/components/home/ui-components/HelloWorld.jsx).
 
 Below is the example file structure with brief descriptions in parentheses next to the pertinent files. For
 more information on the directory structure of Lazo application please refer to the Lazo
