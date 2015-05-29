@@ -9,7 +9,7 @@ define(['lazoView'], function (LazoView) {
                 throw new Error('lazo-react-view: React must be defined, <lazo-react-view>.React');
             }
             if (!this.Container) {
-                throw new Error('lazo-react-view: A Reacr Container component must be defined, <lazo-react-view>.Container');
+                throw new Error('lazo-react-view: A React Container component must be defined, <lazo-react-view>.Container');
             }
             LazoView.prototype.constructor.call(this, options);
             this.createContainer();
@@ -21,22 +21,24 @@ define(['lazoView'], function (LazoView) {
             // stateless components; the container component should be
             // extended with functionality similar to https://github.com/magalhas/backbone-react-component
             // should set this.container to this.Container instance
-            this.container = this.React.createFactory(this.Container);
+            this.ContainerFactory = this.React.createFactory(this.Container);
+            this.container = this.ContainerFactory(this.getContainerState());
         },
 
-        // TODO: merge view properties
         getContainerState: function () {
             return {
+                view: this,
                 // extended backbone models
                 models: this.ctl.ctx.models,
                 // extended backbone collections
                 collections: this.ctl.ctx.collections,
-                // read only:
+                // constants:
                 // https://github.com/lazojs/lazo/wiki/Assets
                 assets: this.ctl.ctx.assets,
                 // wrapper API for this hash:
                 // https://github.com/lazojs/lazo/blob/v2/docs/LazoController.md#setshareddatakey-val
-                // there is also a getSharedData
+                // there is also a getSharedData;
+                // TODO: need a way to keep these in sync; add an on setSharedData event to this view???
                 data: this.ctl.ctx._rootCtx.data
             };
         },
@@ -47,14 +49,11 @@ define(['lazoView'], function (LazoView) {
             }
 
             options.success = options.success || function () {};
-            options.error = options.error || function () {};
+            options.error = options.error || function (err) {
+                throw err;
+            };
             try {
-                this.React.render(this.container(this.getContainerState()), this.el);
-                // TODO:
-                // typically the HTML string is passed to success
-                // doesn't really add much value, but we should probably pass
-                // it or the container instance just for consistency
-                options.success();
+                options.success(this.React.render(this.container, this.el));
             } catch (e) {
                 options.error(e);
             }
@@ -62,7 +61,7 @@ define(['lazoView'], function (LazoView) {
 
         getInnerHtml: function (options) {
             try {
-                options.success(this.React.renderToString(this.container(this.getContainerState())));
+                options.success(this.React.renderToString(this.container));
             } catch (e) {
                 options.error(e);
             }
@@ -78,6 +77,11 @@ define(['lazoView'], function (LazoView) {
                     throw err;
                 }
             });
+        },
+
+        // TODO: react specific clean up goes here
+        onRemove: function () {
+
         }
 
     });

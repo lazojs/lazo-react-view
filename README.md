@@ -1,24 +1,84 @@
 # lazo-react-view
-The `lazo-react-view` is designed to integrated react with lazo at the view level. It is intended to be
-a [react container component](https://medium.com/@learnreact/container-components-c0e67432e005).
+The `lazo-react-view` is designed to integrated [React](https://facebook.github.io/react/) with
+[Lazo](http://lazojs.org/) at the view level. The Lazo view passes data to a
+[React container component](https://medium.com/@learnreact/container-components-c0e67432e005).
 
-## Open Design Questions/Tasks
+>
 
-* Including React Component, JSX in AMD
-    * Currently a compile step is not required for lazo; it would be nice to leverage loader
-      for this, e.g., `define(['jsx!app/views/react/a.jsx'], function (cmp) {})`, so that users
-      can easily integrate their react components.
-    * Should be be part of `./example`, so the users can see the best practice for integrating with lazo
-* How should we be serliazing and linking the following data between the lazo view and
-  react container component? Maybe something like `<lazo-react-view>.sync(objName, prop, val)`
-  for getting changes back to lazo and for getting data to react listen for changes and
-  `<lazo-react-view>.serializeData()`.
-    * models, collections
-    * lazo view properties
-    * context shared data
-    * assets
-* Documentation
+## Open Design Issues and Tasks
 
-## Running the Example
+* Syncing React component `props` with Lazo data sources, e.g.,
+[backbone-react-component](https://github.com/magalhas/backbone-react-component).
+* More robust example (TodoMVC???)
+  * Incorporate assets
+  * Render model, collection and assets data
+  * Add stateless React components to container component
+  * DOM events and data changes that trigger re-rendering
 
-`npm start`
+## Example
+An example usaged can be found in `.example/`.
+
+### Running the Example
+
+Install:
+
+```shell
+npm install
+```
+
+Start the Lazo server:
+
+```shell
+npm start
+```
+
+Open browser:
+
+[http://localhost:8080/](http://localhost:8080/)
+
+### Overview
+The example leverages [jsx-requirejs-plugin](https://github.com/philix/jsx-requirejs-plugin)
+loader plugin to load AMD modules that contain [JSX](https://facebook.github.io/jsx/). This
+plugin and React are pulled in via [Bower](http://bower.io/) (See [`bower.json`](blob/master/bower.json) and
+[`.bowerrc`](blob/master/.bowerrc)).
+
+The [RequireJS](http://requirejs.org/) configuration for these is in
+[`./example/conf.json`](blob/master/example/conf.json).
+
+[http://localhost:8080/](http://localhost:8080/) returns the response from
+[`./exmaple/components/home`](tree/master/example/components/home). The Lazo view extends
+`lazo-react-view` adding a reference to React and the
+[container component](blob/master/example/components/home/ui-components/HelloWorld.jsx).
+
+Below is the example file structure with brief descriptions in parentheses next to the pertinent files. For
+more information on the directory structure of Lazo application please refer to the Lazo
+[documentation](http://lazojs.org/).
+
+```shell
+example
+├── app
+│   ├── app.json (routes)
+│   ├── application.js (initialization)
+│   ├── lazo-react-view (lazo-react bridge)
+│   │   └── index.js
+│   ├── server (debugging)
+│   │   └── server.js
+│   └── vendor (bower modules)
+│       ├── ...
+├── components
+│   └── home (responds to route (/))
+│       ├── components
+│       │   └── HelloWorld.jsx (component container)
+│       ├── controller.js (fetches model and collection data)
+│       └── views
+│           └── index.js (extends lazo-react-view)
+├── conf.json (RequireJS configuration)
+└── models (example data)
+    ├── collection-example
+    │   └── server
+    │       └── syncher.js
+    └── model-example
+        └── server
+            └── syncher.js
+
+```

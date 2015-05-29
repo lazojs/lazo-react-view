@@ -1,4 +1,4 @@
-define(['app/lazo-react-view/index', 'react', 'jsx!../components/HelloWorld'],
+define(['app/lazo-react-view/index', 'react', 'jsx!../ui-components/HelloWorld'],
     function (LazoReactView, React, HelloWorld) {
 
    'use strict';

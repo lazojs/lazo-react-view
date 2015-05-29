@@ -25,14 +25,16 @@
   },
   "github": "https://github.com/jstrimpel/lazo-react-view",
   "devDependencies": {
-    "lazo": "2.2.8-alpha"
+    "lazo": "2.2.8-alpha",
+    "gulp": "3.8.x"
   },
   "main": "dist/index.js",
   "lazo": {
     "view": true
   },
   "scripts": {
-    "start": "lazo start ./example"
+    "start": "lazo start ./example",
+    "prepublish": "bower install && gulp build-example"
   },
   "maintainers": [
     {
