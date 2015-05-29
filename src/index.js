@@ -16,7 +16,6 @@ define(['lazoView'], function (LazoView) {
         },
 
         createContainer: function () {
-            var state = this.getContainerState();
             // expects this.Container to be a react components with
             // a render function that passes state properties to
             // stateless components; the container component should be
@@ -25,6 +24,7 @@ define(['lazoView'], function (LazoView) {
             this.container = this.React.createFactory(this.Container);
         },
 
+        // TODO: merge view properties
         getContainerState: function () {
             return {
                 // extended backbone models
@@ -49,7 +49,7 @@ define(['lazoView'], function (LazoView) {
             options.success = options.success || function () {};
             options.error = options.error || function () {};
             try {
-                this.React.render(this.container(), this.el);
+                this.React.render(this.container(this.getContainerState()), this.el);
                 // TODO:
                 // typically the HTML string is passed to success
                 // doesn't really add much value, but we should probably pass
@@ -62,7 +62,7 @@ define(['lazoView'], function (LazoView) {
 
         getInnerHtml: function (options) {
             try {
-                options.success(this.React.renderToString(this.container()));
+                options.success(this.React.renderToString(this.container(this.getContainerState())));
             } catch (e) {
                 options.error(e);
             }
