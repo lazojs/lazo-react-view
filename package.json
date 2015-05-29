@@ -25,7 +25,7 @@
   },
   "github": "https://github.com/jstrimpel/lazo-react-view",
   "devDependencies": {
-    "lazo": "2.2.8-alpha",
+    "lazo": "2.2.9-alpha",
     "gulp": "3.8.x"
   },
   "main": "dist/index.js",
