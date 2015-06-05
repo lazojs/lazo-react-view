@@ -1,7 +1,7 @@
 {
   "name": "lazo-react-view",
   "description": "Lazo hello world example",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "keywords": [
     "lazojs",
     "hello world"
@@ -30,7 +30,16 @@
   },
   "main": "index.js",
   "lazo": {
-    "view": true
+    "view": true,
+    "conf": {
+      "requirejs": {
+        "common": {
+          "paths": {
+            "lazo-react-view": "app/views/lazo-react-view/index"
+          }
+        }
+      }
+    }
   },
   "scripts": {
     "start": "lazo start ./example",
