@@ -30,3 +30,4 @@ example/app/vendor
 example/app/lazo-react-view
 
 .DS_Store
+dist

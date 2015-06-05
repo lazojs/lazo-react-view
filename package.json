@@ -1,7 +1,7 @@
 {
   "name": "lazo-react-view",
   "description": "Lazo hello world example",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "keywords": [
     "lazojs",
     "hello world"
@@ -34,7 +34,7 @@
   },
   "scripts": {
     "start": "lazo start ./example",
-    "prepublish": "bower install && gulp build-example"
+    "prepublish": "bower install && gulp build-example && gulp build-dist"
   },
   "maintainers": [
     {
