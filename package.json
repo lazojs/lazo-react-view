@@ -1,7 +1,7 @@
 {
   "name": "lazo-react-view",
   "description": "Lazo hello world example",
-  "version": "1.0.0",
+  "version": "0.0.2",
   "keywords": [
     "lazojs",
     "hello world"
@@ -28,7 +28,7 @@
     "lazo": "2.2.9-alpha",
     "gulp": "3.8.x"
   },
-  "main": "dist/index.js",
+  "main": "index.js",
   "lazo": {
     "view": true
   },
